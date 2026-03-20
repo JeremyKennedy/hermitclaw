@@ -41,7 +41,7 @@ This kills the current session and starts fresh — no conversation history carr
 2. **State why** (config change, explicit request, etc.)
 3. Then run the nohup command as your last action
 
-After restart, the SessionStart hook fires and instructs you to run `/welcome`. Follow that instruction immediately.
+After restart, hermitclaw automatically passes `/welcome` as the initial prompt. The welcome skill sends a Telegram announcement.
 
 ## When to Restart
 

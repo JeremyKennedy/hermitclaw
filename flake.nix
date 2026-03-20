@@ -139,21 +139,7 @@
 
             programs.claude-code = {
               skills.self-management = lib.mkDefault ./skills/self-management;
-
-              hooks.welcome-telegram = lib.mkDefault (builtins.readFile ./hooks/welcome-telegram);
-
-              settings.hooks.SessionStart = lib.mkDefault [
-                {
-                  matcher = "startup";
-                  hooks = [
-                    {
-                      type = "command";
-                      command = "bash ~/.claude/hooks/welcome-telegram";
-                      async = true;
-                    }
-                  ];
-                }
-              ];
+              skills.welcome = lib.mkDefault ./skills/welcome;
             };
           };
         };

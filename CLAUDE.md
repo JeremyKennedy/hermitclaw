@@ -1,4 +1,4 @@
-# hermitclaw
+# HermitClaw
 
 Persistent Claude Code agent runner. Runs Claude Code in a tmux session with auto-restart, configurable channels, and resume-by-default.
 
@@ -6,20 +6,22 @@ Persistent Claude Code agent runner. Runs Claude Code in a tmux session with aut
 
 ## Architecture
 
-Single bash script (`hermitclaw`) is the entire runtime. The Nix module and shell installer are delivery mechanisms.
+Go binary (`hermitclaw`) is the runtime. The Nix module and shell installer are delivery mechanisms.
 
 ```
-hermitclaw              # The script — all runtime logic
+main.go                 # Entry point — CLI, tmux session management, restart loop
+internal/config/        # Config loading (TOML) with CLI flag overrides
+internal/tmux/          # tmux session operations
 flake.nix               # Nix flake: package + home-manager module + checks
-install.sh              # Shell installer for non-Nix users
 config.example.toml     # Documented example config
-skills/welcome/         # Telegram announcement skill
+skills/welcome/         # Telegram announcement skill (runs on every start)
+skills/self-management/ # Agent self-restart and status commands
 ```
 
 ## Key Design Decisions
 
-- **Script is source of truth**: Nix module generates config.toml and calls the script. No duplicated logic.
-- **`_run` self-invocation**: The script calls itself inside tmux (`hermitclaw _run`) — no separate wrapper script needed.
+- **Binary is source of truth**: Nix module generates config.toml and calls the binary. No duplicated logic.
+- **`_run` self-invocation**: The binary calls itself inside tmux (`hermitclaw _run`) — no separate wrapper script needed.
 - **Config cascade**: CLI flags > config.toml > built-in defaults. No env var layer for simplicity.
 - **TOML parsing**: Flat key=value only, grep/sed, never eval'd.
 - **`--dangerously-skip-permissions` always**: Not configurable. This tool is for autonomous agent operation.
