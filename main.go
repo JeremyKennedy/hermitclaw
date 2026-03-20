@@ -333,7 +333,7 @@ func runCmd() *cobra.Command {
 				}
 
 				// Initial prompt — runs /welcome on every start
-				claudeArgs = append(claudeArgs, "/welcome")
+				claudeArgs = append(claudeArgs, "--prompt", "/welcome")
 
 				fmt.Println("Starting claude...")
 				c := exec.Command(cfg.ClaudeBinary, claudeArgs...)
