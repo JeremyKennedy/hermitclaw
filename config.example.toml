@@ -1,0 +1,24 @@
+# Hermitclaw configuration
+# CLI flags override these values. See 'hermitclaw --help' for flag equivalents.
+
+# Working directory for Claude Code sessions
+working_directory = "~/dev"
+
+# tmux session name
+session_name = "hermitclaw"
+
+# Path to claude binary (default: finds 'claude' in PATH)
+# claude_binary = "claude"
+
+# Claude Code channels (comma-separated)
+# channels = "plugin:telegram@claude-plugins-official"
+
+# Extra arguments passed to claude (space-separated)
+# extra_args = ""
+
+# Resume previous conversation on restart (default: true)
+# Use 'hermitclaw fresh' to start a new conversation
+auto_resume = true
+
+# Seconds to wait before restarting after Claude exits
+restart_delay = 5
