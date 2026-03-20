@@ -138,6 +138,8 @@
             };
 
             programs.claude-code = {
+              skills.self-management = lib.mkDefault ./skills/self-management;
+
               hooks.welcome-telegram = lib.mkDefault (builtins.readFile ./hooks/welcome-telegram);
 
               settings.hooks.SessionStart = lib.mkDefault [
