@@ -138,7 +138,7 @@
             };
 
             programs.claude-code = {
-              skills.welcome = lib.mkDefault ./skills/welcome;
+              hooks.welcome-telegram = lib.mkDefault (builtins.readFile ./hooks/welcome-telegram);
 
               settings.hooks.SessionStart = lib.mkDefault [
                 {
@@ -146,8 +146,8 @@
                   hooks = [
                     {
                       type = "command";
-                      command = ''echo '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"Run /welcome now to announce this session on Telegram."}}'  '';
-                      async = false;
+                      command = "bash ~/.claude/hooks/welcome-telegram";
+                      async = true;
                     }
                   ];
                 }
