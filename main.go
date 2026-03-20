@@ -332,8 +332,8 @@ func runCmd() *cobra.Command {
 					claudeArgs = append(claudeArgs, strings.Fields(cfg.ExtraArgs)...)
 				}
 
-				// Initial prompt — runs /welcome on every start
-				claudeArgs = append(claudeArgs, "--prompt", "/welcome")
+				// Initial prompt — runs /welcome on every start (must be last arg)
+				claudeArgs = append(claudeArgs, "--", "/welcome")
 
 				fmt.Println("Starting claude...")
 				c := exec.Command(cfg.ClaudeBinary, claudeArgs...)
