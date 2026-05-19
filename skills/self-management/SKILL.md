@@ -41,7 +41,7 @@ This kills the current session and starts fresh — no conversation history carr
 2. **State why** (config change, explicit request, etc.)
 3. Then run the nohup command as your last action
 
-After restart, hermitclaw automatically passes `/welcome` as the initial prompt. The welcome skill sends a Telegram announcement.
+After restart, hermitclaw may pass a plain-text `initial_prompt` from config. Keep that prompt repo-local and avoid depending on globally installed Claude skills or commands.
 
 ## When to Restart
 

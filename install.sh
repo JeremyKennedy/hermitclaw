@@ -7,7 +7,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 INSTALL_DIR="${HOME}/.local/bin"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/hermitclaw"
-SKILL_DIR="${HOME}/.claude/skills/welcome"
 SYSTEMD_FLAG=false
 
 for arg in "$@"; do
@@ -71,17 +70,6 @@ fi
 
 chmod +x "$INSTALL_DIR/hermitclaw"
 echo "  Installed: ${INSTALL_DIR}/hermitclaw"
-
-# Install welcome skill
-echo ""
-echo "=== Installing welcome skill ==="
-if [ -d "$SCRIPT_DIR/skills/welcome" ]; then
-  mkdir -p "$SKILL_DIR"
-  cp "$SCRIPT_DIR/skills/welcome/SKILL.md" "$SKILL_DIR/SKILL.md"
-  echo "  Installed: ${SKILL_DIR}/SKILL.md"
-else
-  echo "  Skipped: skills/welcome not found in source"
-fi
 
 # Create config
 echo ""

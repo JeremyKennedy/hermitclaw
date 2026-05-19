@@ -64,6 +64,12 @@
               description = "Working directory for Claude Code sessions.";
             };
 
+            initialPrompt = lib.mkOption {
+              type = lib.types.str;
+              default = "";
+              description = "Optional plain-text initial prompt passed to Claude on start.";
+            };
+
             channels = lib.mkOption {
               type = lib.types.listOf lib.types.str;
               default = [ ];
@@ -113,6 +119,7 @@
 
             xdg.configFile."hermitclaw/config.toml".text = ''
               working_directory = "${cfg.workingDirectory}"
+              initial_prompt = ${builtins.toJSON cfg.initialPrompt}
               session_name = "${cfg.sessionName}"
               claude_binary = "${cfg.claudePackage}/bin/claude"
               channels = "${channelsStr}"
@@ -137,10 +144,6 @@
               };
             };
 
-            programs.claude-code = {
-              skills.self-management = lib.mkDefault ./skills/self-management;
-              skills.welcome = lib.mkDefault ./skills/welcome;
-            };
           };
         };
 

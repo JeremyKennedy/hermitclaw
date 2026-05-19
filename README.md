@@ -11,7 +11,7 @@ Like a hermit crab — lives in a shell, never lets go.
 - **Resume by default** — conversations persist across restarts via `--continue`
 - **Channel support** — connect Telegram or other channels
 - **Systemd integration** — optional systemd user service for boot-time start
-- **Welcome skill** — announces on Telegram when the agent starts
+- **Repo-local startup prompt** — lets the working tree define startup behavior without writing agent-specific Claude assets into `~/.claude`
 
 > **Security Warning**
 >
@@ -44,18 +44,20 @@ programs.hermitclaw = {
 };
 ```
 
+If you want startup behavior, define it in the working tree and pass a plain-text `initial_prompt` via hermitclaw config instead of relying on `/welcome` from `~/.claude`.
+
 The Nix module automatically:
 - Installs the binary with tmux on PATH
 - Generates `~/.config/hermitclaw/config.toml`
 - Creates a systemd user service
-- Installs the welcome skill and SessionStart hook
+- Starts Claude in the configured working directory without installing agent-specific Claude skills or commands
 
 ### Option B: Shell Installer
 
 ```bash
 git clone https://git.jeremyk.net/jeremy/hermitclaw.git
 cd hermitclaw
-./install.sh            # Copies binary + config + welcome skill
+./install.sh            # Copies binary + config only
 ./install.sh --systemd  # Also installs systemd user service
 ```
 
@@ -81,6 +83,10 @@ Config file: `~/.config/hermitclaw/config.toml`
 ```toml
 # Working directory for Claude Code sessions
 working_directory = "~/dev"
+
+# Optional plain-text initial prompt passed to Claude at startup.
+# Keep agent-specific instructions in the working tree, e.g. ~/dev/jk-agent/CLAUDE.md
+# initial_prompt = "Read CLAUDE.md in the current working directory and follow it."
 
 # tmux session name
 session_name = "hermitclaw"

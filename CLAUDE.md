@@ -14,8 +14,8 @@ internal/config/        # Config loading (TOML) with CLI flag overrides
 internal/tmux/          # tmux session operations
 flake.nix               # Nix flake: package + home-manager module + checks
 config.example.toml     # Documented example config
-skills/welcome/         # Telegram announcement skill (runs on every start)
-skills/self-management/ # Agent self-restart and status commands
+skills/welcome/         # Legacy prompt asset; no longer installed into ~/.claude
+skills/self-management/ # Legacy restart guidance; prefer repo-local working-tree docs
 ```
 
 ## Key Design Decisions
@@ -26,6 +26,7 @@ skills/self-management/ # Agent self-restart and status commands
 - **TOML parsing**: Flat key=value only, grep/sed, never eval'd.
 - **`--dangerously-skip-permissions` always**: Not configurable. This tool is for autonomous agent operation.
 - **`--continue` by default**: Resume previous conversation on restart. `hermitclaw fresh` for new session.
+- **Startup behavior belongs to the working tree**: use `working_directory` plus optional plain-text `initial_prompt`, not globally installed Claude skills/commands.
 
 ## Commands
 

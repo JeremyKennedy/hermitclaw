@@ -4,6 +4,10 @@
 # Working directory for Claude Code sessions
 working_directory = "~/dev"
 
+# Optional plain-text initial prompt passed to Claude at startup.
+# Keep agent-specific instructions in the working tree rather than ~/.claude.
+# initial_prompt = "Read CLAUDE.md in the current working directory and follow it."
+
 # tmux session name
 session_name = "hermitclaw"
 

@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	WorkingDirectory string `toml:"working_directory"`
+	InitialPrompt    string `toml:"initial_prompt"`
 	SessionName      string `toml:"session_name"`
 	Channels         string `toml:"channels"`
 	ExtraArgs        string `toml:"extra_args"`
@@ -20,6 +21,7 @@ type Config struct {
 func DefaultConfig() *Config {
 	return &Config{
 		WorkingDirectory: os.Getenv("HOME"),
+		InitialPrompt:    "",
 		SessionName:      "hermitclaw",
 		Channels:         "",
 		ExtraArgs:        "",

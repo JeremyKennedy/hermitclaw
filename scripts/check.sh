@@ -46,7 +46,7 @@ fi
 
 echo ""
 echo "=== structure ==="
-for required in config.example.toml hooks/welcome-telegram LICENSE README.md CLAUDE.md; do
+for required in config.example.toml LICENSE README.md CLAUDE.md; do
   if [ -f "$required" ]; then
     echo "  $required: OK"
   else
